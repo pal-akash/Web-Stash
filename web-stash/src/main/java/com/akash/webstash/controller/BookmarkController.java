@@ -14,4 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class BookmarkController {
 
+    private final BookmarkService bookmarkService;
+
+    @GetMapping
+    public BookmarkDTO getBookmarks(@RequestParam(name = "page", defaultValue = "1") Integer page){
+        return bookmarkService.getBookmarks(page);
+    }
 }
