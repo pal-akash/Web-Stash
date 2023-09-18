@@ -3,7 +3,6 @@ package com.akash.webstash.service;
 import com.akash.webstash.dto.BookmarkDTO;
 import com.akash.webstash.dto.BookmarksDTO;
 import com.akash.webstash.mapper.BookmarkMapper;
-import com.akash.webstash.model.Bookmark;
 import com.akash.webstash.repository.BookmarkRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
