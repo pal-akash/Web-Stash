@@ -5,6 +5,8 @@ import com.akash.webstash.repository.BookmarkRepository;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -46,17 +48,35 @@ class BookmarkControllerTest {
         bookmarkRepository.saveAll(bookmarks);
     }
 
-    @Test
-    void shouldGetBookmarks() throws Exception {
-        mvc.perform(get("/api/bookmarks"))
+//    @Test
+//    void shouldGetBookmarks() throws Exception {
+//        mvc.perform(get("/api/bookmarks"))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.totalElements", CoreMatchers.equalTo(4)))
+//                .andExpect(jsonPath("$.totalPages", CoreMatchers.equalTo(2)))
+//                .andExpect(jsonPath("$.currentPage", CoreMatchers.equalTo(1)))
+//                .andExpect(jsonPath("$.isFirst", CoreMatchers.equalTo(true)))
+//                .andExpect(jsonPath("$.isLast", CoreMatchers.equalTo(false)))
+//                .andExpect(jsonPath("$.hasNext", CoreMatchers.equalTo(true)))
+//                .andExpect(jsonPath("$.hasPrevious", CoreMatchers.equalTo(false)))
+//        ;
+//    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1,4,2,1,true,false,true,false",
+            "2,4,2,2,false,true,false,true"
+    })
+    void shouldGetBookmarks(int pageNo, int totalElements, int totalPages, int currentPage, boolean isFirst, boolean isLast, boolean hasNext, boolean hasPrevious) throws Exception {
+        mvc.perform(get("/api/bookmarks?page=" + pageNo))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.totalElements", CoreMatchers.equalTo(4)))
-                .andExpect(jsonPath("$.totalPages", CoreMatchers.equalTo(2)))
-                .andExpect(jsonPath("$.currentPage", CoreMatchers.equalTo(1)))
-                .andExpect(jsonPath("$.isFirst", CoreMatchers.equalTo(true)))
-                .andExpect(jsonPath("$.isLast", CoreMatchers.equalTo(false)))
-                .andExpect(jsonPath("$.hasNext", CoreMatchers.equalTo(true)))
-                .andExpect(jsonPath("$.hasPrevious", CoreMatchers.equalTo(false)))
+                .andExpect(jsonPath("$.totalElements", CoreMatchers.equalTo(totalElements)))
+                .andExpect(jsonPath("$.totalPages", CoreMatchers.equalTo(totalPages)))
+                .andExpect(jsonPath("$.currentPage", CoreMatchers.equalTo(currentPage)))
+                .andExpect(jsonPath("$.isFirst", CoreMatchers.equalTo(isFirst)))
+                .andExpect(jsonPath("$.isLast", CoreMatchers.equalTo(isLast)))
+                .andExpect(jsonPath("$.hasNext", CoreMatchers.equalTo(hasNext)))
+                .andExpect(jsonPath("$.hasPrevious", CoreMatchers.equalTo(hasPrevious)))
         ;
     }
 
