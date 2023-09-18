@@ -1,6 +1,6 @@
 package com.akash.webstash.controller;
 
-import com.akash.webstash.dto.BookmarkDTO;
+import com.akash.webstash.dto.BookmarksDTO;
 import com.akash.webstash.service.BookmarkService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class BookmarkController {
     private final BookmarkService bookmarkService;
 
     @GetMapping
-    public BookmarkDTO getBookmarks(@RequestParam(name = "page", defaultValue = "1") Integer page){
+    public BookmarksDTO getBookmarks(@RequestParam(name = "page", defaultValue = "1") Integer page){
         return bookmarkService.getBookmarks(page);
     }
 }
