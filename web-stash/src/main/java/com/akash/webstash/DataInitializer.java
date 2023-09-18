@@ -1,3 +1,5 @@
+/*
+
 package com.akash.webstash;
 
 import com.akash.webstash.model.Bookmark;
@@ -22,3 +24,5 @@ public class DataInitializer implements CommandLineRunner {
         bookmarkRepository.save(new Bookmark(null, "baeldung", "https://www.baeldung.com", Instant.now()));
     }
 }
+
+ */

@@ -10,4 +10,4 @@ public class WebStashApplication {
 		SpringApplication.run(WebStashApplication.class, args);
 	}
 
-}
+} 
