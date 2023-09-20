@@ -40,10 +40,21 @@ class BookmarkControllerTest {
     void setUp(){
         bookmarkRepository.deleteAllInBatch();
         bookmarks = new ArrayList<>();
+        bookmarks.add(new Bookmark(null, "SivaLabs", "https://sivalabs.in", Instant.now()));
         bookmarks.add(new Bookmark(null, "SpringBlog", "https://spring.io/blog", Instant.now()));
         bookmarks.add(new Bookmark(null, "Quarkus", "https://quarkus.io/", Instant.now()));
+        bookmarks.add(new Bookmark(null, "Micronaut", "https://micronaut.io/", Instant.now()));
+        bookmarks.add(new Bookmark(null, "JOOQ", "https://www.jooq.org/", Instant.now()));
+        bookmarks.add(new Bookmark(null, "VladMihalcea", "https://vladmihalcea.com", Instant.now()));
+        bookmarks.add(new Bookmark(null, "Thoughts On Java", "https://thorben-janssen.com/", Instant.now()));
         bookmarks.add(new Bookmark(null, "DZone", "https://dzone.com/", Instant.now()));
+        bookmarks.add(new Bookmark(null, "DevOpsBookmarks", "http://www.devopsbookmarks.com/", Instant.now()));
+        bookmarks.add(new Bookmark(null, "Kubernetes docs", "https://kubernetes.io/docs/home/", Instant.now()));
+        bookmarks.add(new Bookmark(null, "Expressjs", "https://expressjs.com/", Instant.now()));
+        bookmarks.add(new Bookmark(null, "Marcobehler", "https://www.marcobehler.com", Instant.now()));
         bookmarks.add(new Bookmark(null, "baeldung", "https://www.baeldung.com", Instant.now()));
+        bookmarks.add(new Bookmark(null, "devglan", "https://www.devglan.com", Instant.now()));
+        bookmarks.add(new Bookmark(null, "linuxize", "https://linuxize.com", Instant.now()));
 
         bookmarkRepository.saveAll(bookmarks);
     }
@@ -64,8 +75,8 @@ class BookmarkControllerTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1,4,2,1,true,false,true,false",
-            "2,4,2,2,false,true,false,true"
+            "1,15,2,1,true,false,true,false",
+            "2,15,2,2,false,true,false,true"
     })
     void shouldGetBookmarks(int pageNo, int totalElements, int totalPages, int currentPage, boolean isFirst, boolean isLast, boolean hasNext, boolean hasPrevious) throws Exception {
         mvc.perform(get("/api/bookmarks?page=" + pageNo))
