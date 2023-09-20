@@ -1,6 +1,7 @@
 package com.akash.webstash.service;
 
 import com.akash.webstash.dto.BookmarkDTO;
+import com.akash.webstash.dto.BookmarkVM;
 import com.akash.webstash.dto.BookmarksDTO;
 import com.akash.webstash.mapper.BookmarkMapper;
 import com.akash.webstash.repository.BookmarkRepository;
@@ -25,8 +26,34 @@ public class BookmarkService {
     @Transactional(readOnly = true)
     public BookmarksDTO getBookmarks(Integer page){
         int pageNo = page < 1 ? 0 : page-1;
-        Pageable pageable = PageRequest.of(pageNo, 2, Sort.Direction.DESC, "createdAt");
+        Pageable pageable = PageRequest.of(pageNo, 10, Sort.Direction.DESC, "createdAt");
         Page<BookmarkDTO> bookmarkPage = bookmarkRepository.findBookmarks(pageable);
         return new BookmarksDTO(bookmarkPage);
     }
+
+    @Transactional(readOnly = true)
+    public BookmarksDTO searchBookmarks(String query, Integer page) {
+        int pageNo = page < 1 ? 0 : page-1;
+        Pageable pageable = PageRequest.of(pageNo, 10, Sort.Direction.DESC, "createdAt");
+
+        //Using custom query
+        Page<BookmarkDTO> bookmarkPage = bookmarkRepository.searchBookmarks(query, pageable);
+
+        //using JPA query
+        //Page<BookmarkDTO> bookmarkPage = bookmarkRepository.findByTitleContainsIgnoreCase(query, pageable);
+        return new BookmarksDTO(bookmarkPage);
+    }
+
+//    @Transactional(readOnly = true)
+//    public BookmarksDTO searchBookmarks(String query, Integer page) {
+//        int pageNo = page < 1 ? 0 : page-1;
+//        Pageable pageable = PageRequest.of(pageNo, 10, Sort.Direction.DESC, "createdAt");
+//
+//        //DTO class based projection
+//        Page<BookmarkDTO> bookmarkPage = bookmarkRepository.searchBookmarks(query, pageable);
+//
+//        //Interface based projection
+//        Page<BookmarkVM> bookmarkVMPage = bookmarkRepository.findByTitleContainsIgnoreCase(query, pageable);
+//        return new BookmarksDTO(bookmarkPage);
+//    }
 }
