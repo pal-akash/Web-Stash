@@ -24,6 +24,9 @@ jobs:
           distribution: 'corretto'
           cache: 'maven'
 
+      - name: Change maven wrapper permissions
+        run: chmod +x ./mvnw
+
       - name: Build with Maven
         run: ./mvnw verify
 
