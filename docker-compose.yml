@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+
+
+  webstash-db:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=webstashdb
+    ports:
+      - "15432:5432"
+
+  flyway:
+    image: flyway/flyway:latest
+    command: migrate
+    depends_on:
+      - webstash-db
+    volumes:
+      - ./flyway/sql:/flyway/sql
+    environment:
+      - FLYWAY_URL=jdbc:postgresql://webstash-db:5432/webstashdb
+      - FLYWAY_USER=postgres
+      - FLYWAY_PASSWORD=postgres

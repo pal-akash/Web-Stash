@@ -131,7 +131,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>webstash-back</finalName>
+		<finalName>webstash-api</finalName>
 	</build>
 
 </project>
