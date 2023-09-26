@@ -16,3 +16,14 @@ services:
     restart: always
     depends_on:
     - webstash-db
+
+  webstash-ui-nextjs:
+    container_name: webstash-ui-nextjs
+    build:
+      context: webstash-ui-nextjs
+      dockerfile: Dockerfile
+    ports:
+      - "13000:3000"
+    environment:
+      SERVER_SIDE_API_BASE_URL: http://webstash-api:8080
+      CLIENT_SIDE_API_BASE_URL: http://localhost:18080
