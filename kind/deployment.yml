@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webstash-back
+  labels:
+    app: webstash-back
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webstash-back
+  template:
+    metadata:
+      labels:
+        app: webstash-back
+    spec:
+      containers:
+      - image: akashpal14/webstash-back-jib
+        name: webstash-back-jib

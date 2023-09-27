@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: webstash-config
+data:
+  postgres_host: postgres
+  postgres_port: "5432"
+  postgres_dbname: webstashdb
+  postgres_username: postgres
+  postgres_password: postgres
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: webstash-secrets
+type: Opaque
+data:
+  postgres_username: cG9zdGdyZXM=
+  postgres_password: cG9zdGdyZXM=
+

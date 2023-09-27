@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webstash-back
+  labels:
+    app: webstash-back
+    version: "1.0"
+spec:
+  containers:
+  - image: akashpal14/webstash-back-jib
+    name: webstash-back
+    ports:
+    - containerPort: 8080
