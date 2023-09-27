@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: webstash-config
 data:
-  postgres_host: postgres
+  postgres_host: postgres-svc
   postgres_port: "5432"
   postgres_dbname: webstashdb
   postgres_username: postgres
